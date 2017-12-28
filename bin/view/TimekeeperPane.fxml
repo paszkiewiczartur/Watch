@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXSlider?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TimekeeperPaneController">
+   <bottom>
+      <HBox prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="TimekeeperClearButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="50.0" text="Clear">
+               <HBox.margin>
+                  <Insets left="100.0" right="70.0" />
+               </HBox.margin>
+            </Button>
+            <ToggleButton fx:id="TimekeeperStartButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Start" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="TimekeeperMinuteTextField" maxWidth="60.0" prefHeight="40.0">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </TextField>
+            <Label fx:id="TimekeeperSemicolonLabel" prefHeight="40.0" prefWidth="26.0" text=":" />
+            <TextField fx:id="TimekeeperSecondTextField" maxWidth="60.0" prefHeight="40.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets top="90.0" />
+         </BorderPane.margin>
+      </HBox>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu fx:id="TimekeeperChooseTimeMenu" mnemonicParsing="false" text="Times">
+            <items>
+              <MenuItem fx:id="TimekeeperChooseTimeItem1" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="TimekeeperChooseTimeItem2" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="TimekeeperChooseTimeItem3" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="TimekeeperChooseTimeItem4" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="TimekeeperChooseTimeItem5" mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="TimekeeperLabelVolume" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="100.0" text="Volume" />
+            <JFXSlider fx:id="TimekeeperSliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
