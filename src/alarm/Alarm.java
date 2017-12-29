@@ -1,4 +1,4 @@
-package shared;
+package alarm;
 
 import java.io.Serializable;
 

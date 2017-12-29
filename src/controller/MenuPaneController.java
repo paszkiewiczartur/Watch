@@ -16,17 +16,12 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class MenuPaneController implements Initializable {
-
-
     @FXML
     private MenuItem aboutItem;
-
     @FXML
     private MenuItem closeItem;
-
     @FXML
     private Menu helpMenu;
-
     @FXML
     private Menu fileMenu;
 

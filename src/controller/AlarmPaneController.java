@@ -10,6 +10,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTimePicker;
 
+import alarm.Alarm;
+import alarm.AlarmFileManager;
+import alarm.AlarmRunnable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,40 +26,37 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.Alarm;
-import shared.AlarmFileManager;
-import shared.AlarmRunnable;
 import shared.Ring;
 
 public class AlarmPaneController implements Initializable {
 	public static final String DATE_COLUMN = "Date";
 	public static final String TIME_COLUMN = "Time";
 
-	public ObservableList<Alarm> alarmTableList = FXCollections.observableArrayList();
 	private Thread backgroundThread = new Thread();
-	public Alarm currentRingingAlarm = new Alarm();
 	private AlarmFileManager fileManager= new AlarmFileManager();
 
+	public ObservableList<Alarm> alarmTableList = FXCollections.observableArrayList();
+	public Alarm currentRingingAlarm = new Alarm();
+
 	@FXML
-    private Label AlarmVolumeLabel;
+    private Label volumeLabel;
     @FXML
-    private JFXSlider AlarmVolumeSlider;
+    private JFXSlider volumeSlider;
     @FXML
-    private Button AlarmResetButton;
+    private Button resetButton;
     @FXML
-    private TableView<Alarm> AlarmTableView;
+    private TableView<Alarm> tableView;
     @FXML
-    private Button AlarmAddButton;
+    private Button addButton;
     @FXML
-    public Button AlarmDeleteButton;
+    public Button deleteButton;
     @FXML
-    private JFXDatePicker AlarmDatePicker;
+    private JFXDatePicker datePicker;
     @FXML
-    private JFXTimePicker AlarmTimePicker;
+    private JFXTimePicker timePicker;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        System.out.println("AlarmPaneController initialized");
         configureTable();
         readFromFile();
         configureResetButton();
@@ -69,13 +69,13 @@ public class AlarmPaneController implements Initializable {
     private void configureTable(){
         TableColumn<Alarm, String> dateColumn = new TableColumn<Alarm, String>(DATE_COLUMN);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        AlarmTableView.getColumns().add(dateColumn);
+        tableView.getColumns().add(dateColumn);
 
         TableColumn<Alarm, String> timeColumn = new TableColumn<Alarm, String>(TIME_COLUMN);
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-        AlarmTableView.getColumns().add(timeColumn);
+        tableView.getColumns().add(timeColumn);
 
-        AlarmTableView.setItems(alarmTableList);
+        tableView.setItems(alarmTableList);
     }
 
     private void readFromFile(){
@@ -88,7 +88,7 @@ public class AlarmPaneController implements Initializable {
     }
 
     private void configureResetButton(){
-        AlarmResetButton.setOnAction(new EventHandler<ActionEvent>() {
+        resetButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	alarmTableList.clear();
@@ -96,14 +96,14 @@ public class AlarmPaneController implements Initializable {
                 if(Ring.getInstance().isPlaying()) {
                     Ring.getInstance().pause();
                 }
-                AlarmDeleteButton.setText("Delete");
+                deleteButton.setText("Delete");
         		fileManager.writeToFile(alarmTableList);
             }
         });
     }
 
     private void configureAddButton(){
-        AlarmAddButton.setOnAction(new EventHandler<ActionEvent>() {
+        addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	Alarm alarm = createAlarm();
@@ -117,36 +117,36 @@ public class AlarmPaneController implements Initializable {
     }
 
     private void configureDeleteButton(){
-    	AlarmDeleteButton.setMinWidth(59);
-    	AlarmDeleteButton.setMaxWidth(59);
-    	AlarmDeleteButton.setOnAction(new EventHandler<ActionEvent>() {
+    	deleteButton.setMinWidth(59);
+    	deleteButton.setMaxWidth(59);
+    	deleteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if(Ring.getInstance().isPlaying()) {
                     Ring.getInstance().pause();
-                    System.out.println(currentRingingAlarm);
                     alarmTableList.remove(currentRingingAlarm);
-                    AlarmDeleteButton.setText("Delete");
+                    deleteButton.setText("Delete");
                 } else{
-                	if(!AlarmTableView.getSelectionModel().isEmpty()){
-            			int index = AlarmTableView.getSelectionModel().getSelectedIndex();
+                	if(!tableView.getSelectionModel().isEmpty()){
+            			int index = tableView.getSelectionModel().getSelectedIndex();
             			alarmTableList.remove(index);
             		}
-            		if(alarmTableList.size() == 0) {
-            			backgroundThread.interrupt();
-            		}
                 }
-    			fileManager.writeToFile(alarmTableList);
+        		if(alarmTableList.size() == 0) {
+        			System.out.println("interrupt");
+        			backgroundThread.interrupt();
+        		}
+                fileManager.writeToFile(alarmTableList);
             }
         });
     }
 
     private Alarm createAlarm(){
-       	LocalDate date = AlarmDatePicker.getValue();
+       	LocalDate date = datePicker.getValue();
     	int day = date.getDayOfMonth();
     	int month = date.getMonthValue();
     	int year = date.getYear();
-    	LocalTime time = AlarmTimePicker.getValue();
+    	LocalTime time = timePicker.getValue();
     	int hour = time.getHour();
     	int minutes = time.getMinute();
     	return new Alarm(day, month, year, hour, minutes);
@@ -154,18 +154,18 @@ public class AlarmPaneController implements Initializable {
 
     private void configurePickers(){
     	LocalDate date = LocalDate.now();
-    	AlarmDatePicker.setValue(date);
+    	datePicker.setValue(date);
     	LocalTime time = LocalTime.now();
-    	AlarmTimePicker.setValue(time);
+    	timePicker.setValue(time);
     }
 
     private void configureVolume() {
         final double minVolume = 0;
         final double maxVolume = 1;
-        AlarmVolumeSlider.setMin(minVolume);
-        AlarmVolumeSlider.setMax(maxVolume);
-        AlarmVolumeSlider.setValue(maxVolume);
-        AlarmVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        volumeSlider.setMin(minVolume);
+        volumeSlider.setMax(maxVolume);
+        volumeSlider.setValue(maxVolume);
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Ring.getInstance().getMediaPlayer().setVolume(newValue.doubleValue());
@@ -177,6 +177,5 @@ public class AlarmPaneController implements Initializable {
 		backgroundThread = new Thread(new AlarmRunnable(this));
 		backgroundThread.setDaemon(true);
 		backgroundThread.start();
-		System.out.println("Task started");
 	}
 }

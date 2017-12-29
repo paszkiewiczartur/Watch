@@ -1,4 +1,4 @@
-package shared;
+package alarm;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -65,6 +65,5 @@ public class AlarmFileManager {
 			} catch (IOException e){
 				e.printStackTrace();
 			}
-			System.out.println("Objects have been saved to the file.");
 	}
 }
