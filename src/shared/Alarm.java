@@ -108,7 +108,6 @@ public class Alarm implements Serializable{
 
     @Override
     public String toString() {
-//        return "Alarm [data="+getDate()+",time="+getTime()+"]";
     	return "Alarm ["+getDay()+"."+getMonth()+"."+getYear()+", "+getHour()+":"+getMinutes()+"]";
     }
 }

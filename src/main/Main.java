@@ -11,8 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         final String appName = "Watch version 2.0";
         try {
-            Parent parent = (Parent) FXMLLoader.load(getClass().getResource(
-                    "/view/MainPane.fxml"));
+            Parent parent = (Parent) FXMLLoader.load(getClass().getResource("/view/MainPane.fxml"));
             Scene scene = new Scene(parent);
             primaryStage.setTitle(appName);
             primaryStage.setScene(scene);
