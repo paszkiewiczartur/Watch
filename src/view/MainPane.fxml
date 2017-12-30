@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111"
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPaneController">
+   <children>
+      <fx:include fx:id="menuPane" source="MenuPane.fxml" />
+      <TabPane maxHeight="1.7976931348623157E308" prefHeight="453.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Alarm">
+          	<content>
+				<fx:include fx:id="alarmPane" source="AlarmPane.fxml" />
+            </content>
+          </Tab>
+          <Tab text="Timekeeper">
+          	<content>
+				<fx:include fx:id="timekeeperPane" source="TimekeeperPane.fxml" />
+            </content>
+          </Tab>
+          <Tab text="Stopwatch">
+          	<content>
+				<fx:include fx:id="stopwatchPane" source="StopwatchPane.fxml" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
