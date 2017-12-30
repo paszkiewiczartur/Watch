@@ -65,7 +65,10 @@ public class TimekeeperPaneController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+<<<<<<< HEAD
     	System.out.println("test");
+=======
+>>>>>>> 9ed2872bcd37e3053be142fd04102e5c0586aa93
        createChooseTab();
        configureClearButton();
        configureStartButton();

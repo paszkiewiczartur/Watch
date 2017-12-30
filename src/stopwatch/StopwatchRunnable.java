@@ -24,7 +24,11 @@ public class StopwatchRunnable implements Runnable {
     			}
     		} else{
     			try {
+<<<<<<< HEAD
     				Thread.sleep(123);
+=======
+    				Thread.sleep(723);
+>>>>>>> 9ed2872bcd37e3053be142fd04102e5c0586aa93
     			} catch (InterruptedException e) {
     				System.out.println("Interrupted in sleep");
     				Thread.currentThread().interrupt();
