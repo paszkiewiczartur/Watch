@@ -17,25 +17,25 @@
    <bottom>
       <HBox prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="TimekeeperClearButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="50.0" text="Clear">
+            <Button fx:id="clearButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="50.0" text="Clear">
                <HBox.margin>
                   <Insets left="100.0" right="70.0" />
                </HBox.margin>
             </Button>
-            <ToggleButton fx:id="TimekeeperStartButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Start" />
+            <ToggleButton fx:id="startButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Start" />
          </children>
       </HBox>
    </bottom>
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="TimekeeperMinuteTextField" maxWidth="60.0" prefHeight="40.0">
+            <TextField fx:id="minuteTextField" maxWidth="60.0" prefHeight="40.0">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
             </TextField>
-            <Label fx:id="TimekeeperSemicolonLabel" prefHeight="40.0" prefWidth="26.0" text=":" />
-            <TextField fx:id="TimekeeperSecondTextField" maxWidth="60.0" prefHeight="40.0" />
+            <Label fx:id="semicolonLabel" prefHeight="40.0" prefWidth="26.0" text=":" />
+            <TextField fx:id="secondTextField" maxWidth="60.0" prefHeight="40.0" />
          </children>
          <BorderPane.margin>
             <Insets top="90.0" />
@@ -45,13 +45,13 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu fx:id="TimekeeperChooseTimeMenu" mnemonicParsing="false" text="Times">
+          <Menu fx:id="chooseTimeMenu" mnemonicParsing="false" text="Times">
             <items>
-              <MenuItem fx:id="TimekeeperChooseTimeItem1" mnemonicParsing="false" text="Close" />
-                  <MenuItem fx:id="TimekeeperChooseTimeItem2" mnemonicParsing="false" text="Close" />
-                  <MenuItem fx:id="TimekeeperChooseTimeItem3" mnemonicParsing="false" text="Close" />
-                  <MenuItem fx:id="TimekeeperChooseTimeItem4" mnemonicParsing="false" text="Close" />
-                  <MenuItem fx:id="TimekeeperChooseTimeItem5" mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="chooseTimeItem1" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="chooseTimeItem2" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="chooseTimeItem3" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="chooseTimeItem4" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="chooseTimeItem5" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
         </menus>
@@ -60,8 +60,8 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="TimekeeperLabelVolume" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="100.0" text="Volume" />
-            <JFXSlider fx:id="TimekeeperSliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" />
+            <Label fx:id="labelVolume" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="100.0" text="Volume" />
+            <JFXSlider fx:id="sliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" />
          </children>
       </VBox>
    </left>

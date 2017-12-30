@@ -94,7 +94,7 @@ public class AlarmPaneController implements Initializable {
             	alarmTableList.clear();
             	backgroundThread.interrupt();
                 if(Ring.getInstance().isPlaying()) {
-                    Ring.getInstance().pause();
+                    Ring.getInstance().stop();
                 }
                 deleteButton.setText("Delete");
         		fileManager.writeToFile(alarmTableList);
@@ -123,7 +123,7 @@ public class AlarmPaneController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if(Ring.getInstance().isPlaying()) {
-                    Ring.getInstance().pause();
+                    Ring.getInstance().stop();
                     alarmTableList.remove(currentRingingAlarm);
                     deleteButton.setText("Delete");
                 } else{
@@ -168,7 +168,7 @@ public class AlarmPaneController implements Initializable {
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Ring.getInstance().getMediaPlayer().setVolume(newValue.doubleValue());
+                Ring.getInstance().setVolume(newValue.doubleValue());
             }
         });
     }

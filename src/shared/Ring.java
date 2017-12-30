@@ -41,8 +41,12 @@ public class Ring {
 		mediaPlayer.setCycleCount(3);
     }
 
-    public void pause(){
-    	mediaPlayer.pause();
+    public void stop(){
+    	mediaPlayer.stop();
+    }
+
+    public void setVolume(double newValue){
+    	mediaPlayer.setVolume(newValue);
     }
 
 }

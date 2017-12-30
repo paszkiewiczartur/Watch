@@ -1,7 +1,7 @@
 package stopwatch;
 
-public class TimeConverter {
-	public TimeConverter(){}
+public class StopwatchTimeConverter {
+	public StopwatchTimeConverter(){}
 
     public String getStringFromTime(long time){
     	long minutes;

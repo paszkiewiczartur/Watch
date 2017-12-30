@@ -17,7 +17,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import stopwatch.Lap;
 import stopwatch.StopwatchRunnable;
-import stopwatch.TimeConverter;
+import stopwatch.StopwatchTimeConverter;
 
 public class StopwatchPaneController implements Initializable{
 	public static final String LAP_TIME_COLUMN = "Lap time";
@@ -28,7 +28,7 @@ public class StopwatchPaneController implements Initializable{
 	public Object monitor = new Object();
 	public boolean isPaused = false;
 	public StopWatch stopWatch = new StopWatch();
-	public TimeConverter converter = new TimeConverter();
+	public StopwatchTimeConverter converter = new StopwatchTimeConverter();
 
     @FXML
     public TextField textField;

@@ -5,7 +5,7 @@ import javafx.application.Platform;
 
 public class StopwatchRunnable implements Runnable {
 	private StopwatchPaneController controller;
-	private TimeConverter converter = new TimeConverter();
+	private StopwatchTimeConverter converter = new StopwatchTimeConverter();
 
 	public StopwatchRunnable(StopwatchPaneController controller){
 		this.controller = controller;
