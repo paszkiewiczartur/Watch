@@ -40,6 +40,7 @@ public class TimekeeperRunnable implements Runnable {
    					Thread.sleep(1000);
    				} catch (InterruptedException e) {
    					System.out.println("Interrupted in sleep");
+					Thread.currentThread().interrupt();
    				}
    				if(i == 1){
    					if(!Ring.getInstance().isPlaying()){
@@ -61,6 +62,7 @@ public class TimekeeperRunnable implements Runnable {
 	        	controller.minuteTextField.setText("00");
 	        	controller.secondTextField.setText("00");
 	        	controller.startButton.setSelected(false);
+	        	controller.startButton.setText("Start");
 			}
 		});
         controller.isTimePaused = false;
