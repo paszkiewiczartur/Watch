@@ -75,7 +75,7 @@ public class TimekeeperFileManager {
             try {
                 fileExists = file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Failed operation of creating new file.");
+                System.out.println("Creating new file failed.");
             }
         }
 		try(

@@ -1,52 +1,33 @@
 package alarm;
 
+import java.io.InvalidObjectException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Alarm implements Serializable{
-
-	private static final long serialVersionUID = 4308792603865529707L;
-	private transient StringProperty date;
-	private transient StringProperty time;
+	private static final long serialVersionUID = 7465049257657539187L;
+	private StringProperty date;
+	private StringProperty time;
  	private int day;
  	private int month;
  	private int year;
  	private int hour;
  	private int minutes;
+
  	public String getDate() {
- 		setDate();
  		return date.get();
  	}
  	public void setDate(StringProperty date) {
  		this.date = date;
  	}
- 	public void setDate(){
-		StringBuilder sbDate = new StringBuilder();
-		sbDate.append(this.day);
-		sbDate.append(".");
-		if(this.month <10 ) sbDate.append("0");
-		sbDate.append(this.month);
-		sbDate.append(".");
-		sbDate.append(this.year);
-		this.date = new SimpleStringProperty(sbDate.toString());
- 	}
  	public String getTime() {
- 		setTime();
 		return time.get();
 	}
 	public void setTime(StringProperty time) {
 		this.time = time;
-	}
-	public void setTime(){
-		StringBuilder sbTime = new StringBuilder();
-		if(this.hour < 10) sbTime.append("0");
-		sbTime.append(this.hour);
-		sbTime.append(":");
-		if(this.minutes < 10) sbTime.append("0");
-		sbTime.append(this.minutes);
-		this.time = new SimpleStringProperty(sbTime.toString());
 	}
 	public int getDay() {
 		return day;
@@ -79,15 +60,51 @@ public class Alarm implements Serializable{
 		this.minutes = minutes;
 	}
 
-	public Alarm(){}
-
 	public Alarm(int day, int month, int year, int hour, int minutes){
 		this.day = day;
 		this.month = month;
 		this.year = year;
 		this.hour = hour;
 		this.minutes = minutes;
+		this.date = makeDate(day, month, year);
+		this.time = makeTime(hour, minutes);
+	}
 
+	private Object writeReplace() {
+		return new SerializationProxy(this);
+	}
+
+	private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+		throw new InvalidObjectException("Proxy is required");
+	}
+
+    @Override
+    public String toString() {
+    	return "Alarm ["+getDay()+"."+getMonth()+"."+getYear()+", "+getHour()+":"+getMinutes()+"]";
+    }
+
+    private static class SerializationProxy implements Serializable {
+		private static final long serialVersionUID = -1956012241705660032L;
+     	private int day;
+     	private int month;
+     	private int year;
+     	private int hour;
+     	private int minutes;
+
+     	SerializationProxy(Alarm alarm) {
+     		this.day = alarm.day;
+     		this.month = alarm.month;
+     		this.year = alarm.year;
+     		this.hour = alarm.hour;
+     		this.minutes = alarm.minutes;
+     	}
+
+     	private Object readResolve() {
+     		return new Alarm(day, month, year, hour, minutes);
+     	}
+	}
+
+    private StringProperty makeDate(int day, int month, int year){
 		StringBuilder sbDate = new StringBuilder();
 		sbDate.append(day);
 		sbDate.append(".");
@@ -95,19 +112,16 @@ public class Alarm implements Serializable{
 		sbDate.append(month);
 		sbDate.append(".");
 		sbDate.append(year);
-		this.date = new SimpleStringProperty(sbDate.toString());
+		return new SimpleStringProperty(sbDate.toString());
+    }
 
+    private StringProperty makeTime(int hour, int minutes){
 		StringBuilder sbTime = new StringBuilder();
 		if(hour < 10) sbTime.append("0");
 		sbTime.append(hour);
 		sbTime.append(":");
 		if(minutes < 10) sbTime.append("0");
 		sbTime.append(minutes);
-		this.time = new SimpleStringProperty(sbTime.toString());
-	}
-
-    @Override
-    public String toString() {
-    	return "Alarm ["+getDay()+"."+getMonth()+"."+getYear()+", "+getHour()+":"+getMinutes()+"]";
+		return new SimpleStringProperty(sbTime.toString());
     }
 }

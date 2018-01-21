@@ -2,7 +2,10 @@ package stopwatch;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
+
 import org.apache.commons.lang3.time.StopWatch;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +25,7 @@ public class StopwatchPaneController implements Initializable{
 	private ObservableList<Lap> lapList = FXCollections.observableArrayList();
 	private Thread backgroundThread;
 
-	Object monitor = new Object();
+	CountDownLatch latch;
 	boolean isPaused = false;
 	StopWatch stopWatch = new StopWatch();
 	StopwatchTimeConverter converter = new StopwatchTimeConverter();
@@ -71,7 +74,6 @@ public class StopwatchPaneController implements Initializable{
         clearButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	System.out.println("handle clearButton");
             	backgroundThread.interrupt();
             	if(stopWatch.isSuspended()){
             		isPaused = false;
@@ -99,15 +101,14 @@ public class StopwatchPaneController implements Initializable{
                  	startButton.setText("Pause");
             	} else {
             		if (startButton.isSelected()) {
-                		synchronized(monitor){
-                			monitor.notify();
-                		}
-                       	stopWatch.resume();
                     	isPaused = false;
+            			latch.countDown();
+                       	stopWatch.resume();
                      	startButton.setText("Pause");
             		} else {
                 		isPaused = true;
                 		stopWatch.suspend();
+                		latch = new CountDownLatch(1);
                 		startButton.setText("Resume");
             		}
             	}

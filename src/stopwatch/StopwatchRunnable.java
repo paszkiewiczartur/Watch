@@ -13,19 +13,15 @@ public class StopwatchRunnable implements Runnable {
     public void run(){
     	while(!Thread.currentThread().isInterrupted()){
     		if(controller.isPaused){
-    			synchronized(controller.monitor){
-    				try {
-						controller.monitor.wait();
-					} catch (InterruptedException e) {
-						System.out.println("Interrupted in wait");
-						Thread.currentThread().interrupt();
-					}
-    			}
+    			try {
+					controller.latch.await();
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
     		} else{
     			try {
     				Thread.sleep(123);
     			} catch (InterruptedException e) {
-    				System.out.println("Interrupted in sleep");
     				Thread.currentThread().interrupt();
     			}
     			Platform.runLater(new Runnable(){

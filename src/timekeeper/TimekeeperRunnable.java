@@ -18,14 +18,12 @@ public class TimekeeperRunnable implements Runnable {
     		controller.updateTimestamps();
     		for(long i = converter.getTimeFromTextFields(); i > 0 && !Thread.currentThread().isInterrupted(); i--){
     			if(controller.isTimePaused){
-    				synchronized(controller.monitor){
-    					try {
-    						controller.monitor.wait();
-    					} catch (InterruptedException e) {
-    						System.out.println("Interrupted in wait");
-    						Thread.currentThread().interrupt();
-    					}
-    				}
+					try {
+						controller.latch.await();
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+					}
+
     			}
     			final long j = i;
     			Platform.runLater(new Runnable(){
@@ -38,7 +36,6 @@ public class TimekeeperRunnable implements Runnable {
   				try {
    					Thread.sleep(1000);
    				} catch (InterruptedException e) {
-   					System.out.println("Interrupted in sleep");
 					Thread.currentThread().interrupt();
    				}
    				if(i == 1){

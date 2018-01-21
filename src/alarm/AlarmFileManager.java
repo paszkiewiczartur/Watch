@@ -37,9 +37,9 @@ public class AlarmFileManager {
     		} catch (ClassNotFoundException e){
     			e.printStackTrace();
     		}
-			for(int i=0; i<alarmFileList.size(); i++){
+/*			for(int i=0; i<alarmFileList.size(); i++){
 				alarmFileList.get(i).setDate();
-			}
+			}*/
         }
 		return alarmFileList;
 	}
@@ -51,7 +51,7 @@ public class AlarmFileManager {
             try {
                 fileExists = file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Failed operation of creating new file.");
+                System.out.println("Creating new file failed.");
             }
         }
 		try(FileOutputStream fs = new FileOutputStream(fileName);

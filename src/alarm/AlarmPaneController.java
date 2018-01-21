@@ -33,7 +33,7 @@ public class AlarmPaneController implements Initializable {
 	private AlarmFileManager fileManager= new AlarmFileManager();
 
 	ObservableList<Alarm> alarmTableList = FXCollections.observableArrayList();
-	Alarm currentRingingAlarm = new Alarm();
+	Alarm currentRingingAlarm;
 
 	@FXML
     private Label volumeLabel;
@@ -130,7 +130,6 @@ public class AlarmPaneController implements Initializable {
             		}
                 }
         		if(alarmTableList.size() == 0) {
-        			System.out.println("interrupt");
         			backgroundThread.interrupt();
         		}
                 fileManager.writeToFile(alarmTableList);

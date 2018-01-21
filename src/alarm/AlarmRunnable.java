@@ -27,7 +27,6 @@ public class AlarmRunnable implements Runnable {
 			try {
     				Thread.sleep(10000);
     			} catch (InterruptedException e) {
-    				System.out.println("Interrupted in sleep");
     				Thread.currentThread().interrupt();
     			}
     	}

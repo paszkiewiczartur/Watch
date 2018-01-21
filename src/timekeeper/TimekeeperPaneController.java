@@ -2,6 +2,7 @@ package timekeeper;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 
 import com.jfoenix.controls.JFXSlider;
 
@@ -25,11 +26,11 @@ public class TimekeeperPaneController implements Initializable {
     private TimekeeperFileManager fileManager = new TimekeeperFileManager();
     private MenuItem[] chooseTimeItems = new MenuItem[5];
 
-    Object monitor = new Object();
     long lastSetTime;
 	boolean isTimePaused = false;
     Timestamp[] timestamps;
     TimekeeperTimeConverter converter = new TimekeeperTimeConverter(this);
+    CountDownLatch latch;
 
     @FXML
     private Button clearButton;
@@ -109,12 +110,11 @@ public class TimekeeperPaneController implements Initializable {
             	} else {
             		if (startButton.isSelected()) {
                     	isTimePaused = false;
-                    	synchronized(monitor){
-                    		monitor.notify();
-                    	}
+                    	latch.countDown();
                     	startButton.setText("Pause");
             		} else {
                     	isTimePaused = true;
+            			latch = new CountDownLatch(1);
                     	startButton.setText("Resume");
             		}
             	}
