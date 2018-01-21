@@ -1,7 +1,5 @@
 package timekeeper;
 
-import controller.TimekeeperPaneController;
-
 public class TimekeeperTimeConverter {
     TimekeeperPaneController controller;
 

@@ -1,6 +1,5 @@
 package stopwatch;
 
-import controller.StopwatchPaneController;
 import javafx.application.Platform;
 
 public class StopwatchRunnable implements Runnable {

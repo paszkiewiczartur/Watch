@@ -1,6 +1,5 @@
 package timekeeper;
 
-import controller.TimekeeperPaneController;
 import javafx.application.Platform;
 import shared.Ring;
 

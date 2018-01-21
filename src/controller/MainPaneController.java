@@ -3,8 +3,11 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import alarm.AlarmPaneController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import stopwatch.StopwatchPaneController;
+import timekeeper.TimekeeperPaneController;
 
 public class MainPaneController implements Initializable {
 

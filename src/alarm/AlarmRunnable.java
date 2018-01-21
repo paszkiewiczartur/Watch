@@ -1,7 +1,7 @@
 package alarm;
 
 import java.time.LocalDateTime;
-import controller.AlarmPaneController;
+
 import javafx.application.Platform;
 import shared.Ring;
 

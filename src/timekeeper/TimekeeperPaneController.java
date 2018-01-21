@@ -1,4 +1,4 @@
-package controller;
+package timekeeper;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,11 +18,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import shared.Ring;
-import timekeeper.TimekeeperFileManager;
-import timekeeper.TimekeeperRunnable;
-import timekeeper.TimekeeperTimeConverter;
-import timekeeper.Timestamp;
-import timekeeper.TimestampsUpdater;
 
 public class TimekeeperPaneController implements Initializable {
 	private Thread backgroundThread = new Thread();
@@ -30,22 +25,22 @@ public class TimekeeperPaneController implements Initializable {
     private TimekeeperFileManager fileManager = new TimekeeperFileManager();
     private MenuItem[] chooseTimeItems = new MenuItem[5];
 
-    public Object monitor = new Object();
-    public long lastSetTime;
-	public boolean isTimePaused = false;
-    public Timestamp[] timestamps;
-    public TimekeeperTimeConverter converter = new TimekeeperTimeConverter(this);
+    Object monitor = new Object();
+    long lastSetTime;
+	boolean isTimePaused = false;
+    Timestamp[] timestamps;
+    TimekeeperTimeConverter converter = new TimekeeperTimeConverter(this);
 
     @FXML
     private Button clearButton;
     @FXML
-    public ToggleButton startButton;
+    ToggleButton startButton;
     @FXML
-    public TextField minuteTextField;
+    TextField minuteTextField;
     @FXML
     private Label semicolonLabel;
     @FXML
-    public TextField secondTextField;
+    TextField secondTextField;
     @FXML
     private Menu chooseTimeMenu;
     @FXML

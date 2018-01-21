@@ -1,4 +1,4 @@
-package controller;
+package alarm;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -10,9 +10,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTimePicker;
 
-import alarm.Alarm;
-import alarm.AlarmFileManager;
-import alarm.AlarmRunnable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,14 +26,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import shared.Ring;
 
 public class AlarmPaneController implements Initializable {
-	public static final String DATE_COLUMN = "Date";
-	public static final String TIME_COLUMN = "Time";
+	private static final String DATE_COLUMN = "Date";
+	private static final String TIME_COLUMN = "Time";
 
 	private Thread backgroundThread = new Thread();
 	private AlarmFileManager fileManager= new AlarmFileManager();
 
-	public ObservableList<Alarm> alarmTableList = FXCollections.observableArrayList();
-	public Alarm currentRingingAlarm = new Alarm();
+	ObservableList<Alarm> alarmTableList = FXCollections.observableArrayList();
+	Alarm currentRingingAlarm = new Alarm();
 
 	@FXML
     private Label volumeLabel;
@@ -49,7 +46,7 @@ public class AlarmPaneController implements Initializable {
     @FXML
     private Button addButton;
     @FXML
-    public Button deleteButton;
+    Button deleteButton;
     @FXML
     private JFXDatePicker datePicker;
     @FXML

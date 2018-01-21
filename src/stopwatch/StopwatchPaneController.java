@@ -1,4 +1,4 @@
-package controller;
+package stopwatch;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,23 +15,20 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
-import stopwatch.Lap;
-import stopwatch.StopwatchRunnable;
-import stopwatch.StopwatchTimeConverter;
 
 public class StopwatchPaneController implements Initializable{
-	public static final String LAP_TIME_COLUMN = "Lap time";
+	private static final String LAP_TIME_COLUMN = "Lap time";
 
 	private ObservableList<Lap> lapList = FXCollections.observableArrayList();
 	private Thread backgroundThread;
 
-	public Object monitor = new Object();
-	public boolean isPaused = false;
-	public StopWatch stopWatch = new StopWatch();
-	public StopwatchTimeConverter converter = new StopwatchTimeConverter();
+	Object monitor = new Object();
+	boolean isPaused = false;
+	StopWatch stopWatch = new StopWatch();
+	StopwatchTimeConverter converter = new StopwatchTimeConverter();
 
     @FXML
-    public TextField textField;
+    TextField textField;
 	@FXML
     private TableView<Lap> tableView;
     @FXML
